@@ -2,17 +2,20 @@ import numpy as np
 import scipy
 from src.integrator import *
 
-f = lambda x: np.exp(-x**2)
-a, b = 0, 1
-exact = 0.5*(np.pi)**(0.5)*scipy.special.erf(1)
-trap = np.round(integrate_1d(f, a, b, method="trapezoidal", n=100), 6)
-sim = np.round(integrate_1d(f, a, b, method="simpson", n=100), 6)
-gauss = np.round(integrate_1d(f, a, b, method="gauss", n=100), 6)
-adapt = np.round(integrate_1d(f, a, b, method="adaptive", n=100), 6)
+f2d = lambda x: np.exp(-x[0]**2 - x[1]**2)
+bounds = [(-5, 5), (-5, 5)]
+mc_2d = integrate_nd(f2d, bounds, method='mc', n=100)
+rec_2d = integrate_nd(f2d, bounds, method='rectangle', n=100)
+exact_2d = np.pi*scipy.special.erf(5)**2
 
 print("Method, value, error" )
-print(f"Trapezoidal: {trap}, {np.round(exact - trap, 6)}")
-print(f"Simpson: {sim}, {np.round(exact - sim, 6)}")
-print(f"Adaptive Simpson: {adapt}, {np.round(exact - adapt, 6)}")
-print(f"Gauss-Legendre: {gauss}, {np.round(exact - gauss, 6)}")
+print(f"2D MC: {np.round(mc_2d, 6)}, {np.round(exact_2d - mc_2d, 6)}")
+print(f"2D Rec: {np.round(rec_2d, 6)}, {np.round(exact_2d - rec_2d, 6)}")
+
+f3d = lambda x: np.exp(-x[0]**2 - x[1]**2 - x[2]**2)
+bounds = [(-5, 5), (-5, 5), (-5, 5)]
+mc_3d = integrate_nd(f3d, bounds, method="mc", n=1000)
+exact_3d = np.pi**(3/2)*scipy.special.erf(5)**3
+
+print(f"3D MC: {np.round(mc_3d, 6)}, {np.round(exact_3d - mc_3d, 6)}")
 
