@@ -1,6 +1,6 @@
 import numpy as np
 import scipy
-from src.integrator import integrate_1d
+from src.integrator import *
 
 f = lambda x: np.exp(-x**2)
 a, b = 0, 1
