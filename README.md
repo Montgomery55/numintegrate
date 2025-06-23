@@ -1,6 +1,6 @@
 # 🧮 NumIntegrate
 
-**NumIntegrate** is a lightweight, fast, and extendable Python library for performing accurate **1D, 2D, and 3D numerical integration**. It supports classic rules (Trapezoidal, Simpson's, Gauss–Legendre), adaptive quadrature, and Monte Carlo integration — all written from scratch and optimized for performance.
+**NumIntegrate** is a lightweight, fast, and extendable Python library for performing accurate **1D, 2D, and 3D numerical integration**. It supports classic rules (Trapezoidal, Simpson's, Gauss–Legendre), adaptive quadrature, and Monte Carlo integration.
 
 ---
 
