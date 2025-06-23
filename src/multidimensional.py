@@ -1,4 +1,24 @@
 import numpy as np
+from .coordinates import *
+
+def integrate_spherical(f, r_bounds, theta_bounds, phi_bounds, n):
+    X, J = spherical_grid(r_bounds, theta_bounds, phi_bounds, n)
+    vals = f(X)
+    dr = (r_bounds[1] - r_bounds[0]) / (n - 1)
+    dtheta = (theta_bounds[1] - theta_bounds[0]) / (n - 1)
+    dphi = (phi_bounds[1] - phi_bounds[0]) / (n - 1)
+    dV = dr * dtheta * dphi
+    return np.sum(vals * J) * dV
+
+
+def integrate_cylindrical(f, r_bounds, theta_bounds, z_bounds, n):
+    X, J = cylindrical_grid(r_bounds, theta_bounds, z_bounds, n)
+    vals = f(X)
+    dr = (r_bounds[1] - r_bounds[0]) / (n - 1)
+    dtheta = (theta_bounds[1] - theta_bounds[0]) / (n - 1)
+    dz = (z_bounds[1] - z_bounds[0]) / (n - 1)
+    dV = dr * dtheta * dz
+    return np.sum(vals * J) * dV
 
 def rectangle_rule_nd(f, bounds, n):
     dim = len(bounds)
