@@ -6,12 +6,16 @@ from .multidimensional import *
 
 
 def integrate_nd(f, bounds, method='rectangle', n=10000):
-    if method == 'rectangle':
+    if method == "rectangle":
         return rectangle_rule_nd(f, bounds, n)
-    elif method == 'mc':
+    elif method == "mc":
         return monte_carlo_nd(f, bounds, n)
+    elif method == "spherical":
+        return integrate_spherical(f, *bounds, n=n)
+    elif method == "cylindrical":
+        return integrate_cylindrical(f, *bounds, n=n)
     else:
-        raise ValueError(f"Uknown method: {method}")
+        raise ValueError(f"Unknown method {method}")
 
 def integrate_1d(f, a, b, method="trapezoidal", n=100):
     if method == "trapezoidal":
